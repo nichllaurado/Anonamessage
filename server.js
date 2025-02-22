@@ -1,5 +1,6 @@
 // Import required modules
 const express = require('express');
+const path = require('path'); // Required for resolving file paths
 const { Pool } = require('pg');
 const bodyParser = require('body-parser');
 
@@ -10,6 +11,9 @@ const port = 3000;
 
 // Set up body-parser middleware
 app.use(bodyParser.json());
+
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Set up PostgreSQL connection
 const pool = new Pool({
