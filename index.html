@@ -40,10 +40,16 @@
             });
         }
 
-        // Reply to a message
         function replyToMessage() {
             const reply = document.getElementById('replyInput').value;
-            const messageId = 1; // Replace with dynamic message ID
+            const messageId = getMessageIdFromDisplayedMessage(); // You'll need to implement this function
+
+            if (!messageId) {
+                alert('Please load a message to reply to first.');
+                return;
+            }
+
+            // Send the reply to the backend
             fetch(`/api/messages/${messageId}/reply`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -53,11 +59,14 @@
             .then(data => {
                 console.log('Reply posted:', data);
                 alert('Reply posted successfully!');
+                // Optionally, refresh the message chain to display the new reply
+                loadRandomMessageChain();
             })
             .catch(error => {
                 console.error('Error posting reply:', error);
             });
         }
+
 
         // Load random message chain
         function loadRandomMessageChain() {
