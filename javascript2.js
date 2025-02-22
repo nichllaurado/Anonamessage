@@ -15,11 +15,15 @@ async function getRandomMessage() {
     return result.rows[0];
 }
 
+
+
 // Example function to post a message
 async function postMessage(content) {
     const result = await pool.query('INSERT INTO messages(content) VALUES($1) RETURNING *', [content]);
     return result.rows[0];
 }
+
+
 
 // Example function to post a reply to a message
 async function postReply(messageId, content) {
