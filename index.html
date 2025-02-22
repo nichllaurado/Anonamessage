@@ -20,65 +20,6 @@
         <textarea id="replyInput" placeholder="Write your reply..."></textarea>
         <button onclick="replyToMessage()">Reply</button>
     </div>
-
-    <script>
-        // Post message to backend
-        function postMessage() {
-            const message = document.getElementById('messageInput').value;
-            fetch('/api/messages', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Message posted:', data);
-                alert('Message posted successfully!');
-            })
-            .catch(error => {
-                console.error('Error posting message:', error);
-            });
-        }
-
-        function replyToMessage() {
-            const reply = document.getElementById('replyInput').value;
-            const messageId = getMessageIdFromDisplayedMessage(); // You'll need to implement this function
-
-            if (!messageId) {
-                alert('Please load a message to reply to first.');
-                return;
-            }
-
-            // Send the reply to the backend
-            fetch(`/api/messages/${messageId}/reply`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ reply })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Reply posted:', data);
-                alert('Reply posted successfully!');
-                // Optionally, refresh the message chain to display the new reply
-                loadRandomMessageChain();
-            })
-            .catch(error => {
-                console.error('Error posting reply:', error);
-            });
-        }
-
-
-        // Load random message chain
-        function loadRandomMessageChain() {
-            fetch('/api/messages/random')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('messageChain').textContent = data.message;
-            })
-            .catch(error => {
-                console.error('Error loading message:', error);
-            });
-        }
-    </script>
+    <script src="indexjavascript.js"></script>
 </body>
 </html>
