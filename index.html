@@ -7,6 +7,7 @@
     <style>
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -18,9 +19,62 @@
             font-size: 3rem;
             color: #333;
         }
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 500px;
+        }
+        textarea, button {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+        .message-chain {
+            background: #eee;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
     </style>
 </head>
 <body>
     <h1>Anonamessage</h1>
+    <div class="container">
+        <h2>Post a Message</h2>
+        <textarea id="messageInput" placeholder="Write your message..."></textarea>
+        <button onclick="postMessage()">Submit</button>
+    </div>
+    <div class="container">
+        <h2>Reply to a Random Chain</h2>
+        <div id="messageChain" class="message-chain">No message loaded.</div>
+        <textarea id="replyInput" placeholder="Write your reply..."></textarea>
+        <button onclick="replyToMessage()">Reply</button>
+    </div>
+
+    <script>
+        function postMessage() {
+            const message = document.getElementById('messageInput').value;
+            console.log('Posting message:', message);
+            // Placeholder for server interaction
+        }
+
+        function replyToMessage() {
+            const reply = document.getElementById('replyInput').value;
+            console.log('Replying to message:', reply);
+            // Placeholder for server interaction
+        }
+
+        function loadRandomMessageChain() {
+            console.log('Loading random message chain...');
+            // Placeholder for fetching message chain
+            document.getElementById('messageChain').textContent = 'Sample message chain history.';
+        }
+
+        loadRandomMessageChain();
+    </script>
 </body>
 </html>
