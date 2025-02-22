@@ -1,0 +1,22 @@
+{
+  "name": "anonamessage",
+  "version": "1.0.0",
+  "main": "javascript.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nichllaurado/Anonamessage.git"
+  },
+  "author": "nichllaurado",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nichllaurado/Anonamessage/issues"
+  },
+  "homepage": "https://github.com/nichllaurado/Anonamessage#readme",
+  "description": "",
+  "dependencies": {
+    "pg": "^8.13.3"
+  }
+}

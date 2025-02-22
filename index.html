@@ -4,42 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anonamessage</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-        }
-        h1 {
-            font-size: 3rem;
-            color: #333;
-        }
-        .container {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            width: 90%;
-            max-width: 500px;
-        }
-        textarea, button {
-            width: 100%;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            font-size: 1rem;
-        }
-        .message-chain {
-            background: #eee;
-            padding: 1rem;
-            border-radius: 5px;
-            margin-bottom: 1rem;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+    
 </head>
 <body>
     <h1>Anonamessage</h1>
@@ -56,25 +22,54 @@
     </div>
 
     <script>
+        // Post message to backend
         function postMessage() {
             const message = document.getElementById('messageInput').value;
-            console.log('Posting message:', message);
-            // Placeholder for server interaction
+            fetch('/api/messages', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Message posted:', data);
+                alert('Message posted successfully!');
+            })
+            .catch(error => {
+                console.error('Error posting message:', error);
+            });
         }
 
+        // Reply to a message
         function replyToMessage() {
             const reply = document.getElementById('replyInput').value;
-            console.log('Replying to message:', reply);
-            // Placeholder for server interaction
+            const messageId = 1; // Replace with dynamic message ID
+            fetch(`/api/messages/${messageId}/reply`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ reply })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Reply posted:', data);
+                alert('Reply posted successfully!');
+            })
+            .catch(error => {
+                console.error('Error posting reply:', error);
+            });
         }
 
+        // Load random message chain
         function loadRandomMessageChain() {
-            console.log('Loading random message chain...');
-            // Placeholder for fetching message chain
-            document.getElementById('messageChain').textContent = 'Sample message chain history.';
+            fetch('/api/messages/random')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('messageChain').textContent = data.message;
+            })
+            .catch(error => {
+                console.error('Error loading message:', error);
+            });
         }
-
-        loadRandomMessageChain();
     </script>
 </body>
 </html>
